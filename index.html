@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Flipbook</title>
+    <!-- Include CSS for styling -->
+    <style>
+        /* Set a light green background for the webpage */
+        body {
+            background-color: #ccffcc; /* Light green */
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Center the flipbook and add a shadow */
+        #flipbook {
+            width: 800px;
+            height: 600px;
+            margin: 50px auto;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+            perspective: 2000px; /* Enhance 3D effect */
+        }
+
+        /* Style for each page */
+        #flipbook .page {
+            width: 400px;
+            height: 600px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        /* Add transition effects to pages */
+        #flipbook .page.turn-page {
+            transition: all 1s ease; /* Slower and smoother transition */
+        }
+
+        /* Navigation buttons container */
+        .nav-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Style for buttons */
+        .nav-buttons button {
+            background-color: #4CAF50; /* Green */
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            margin: 0 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        /* Hover effect for buttons */
+        .nav-buttons button:hover {
+            background-color: #45a049;
+        }
+
+        /* Active button style */
+        .nav-buttons button:active {
+            background-color: #3e8e41;
+        }
+    </style>
+
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Turn.js library -->
+    <script src="https://cdn.jsdelivr.net/gh/blasten/turn.js/turn.min.js"></script>
+</head>
+<body>
+
+<div id="flipbook">
+    <!-- Pages will be added here -->
+    <div class="page" style="background-image:url('page1.jpeg')"></div>
+    <div class="page" style="background-image:url('page2.jpeg')"></div>
+    <div class="page" style="background-image:url('page3.jpeg')"></div>
+    <div class="page" style="background-image:url('page4.jpeg')"></div>
+    <!-- Add more pages as needed -->
+</div>
+
+<!-- Navigation buttons -->
+<div class="nav-buttons">
+    <button id="home">Home</button>
+    <button id="prev">Previous Page</button>
+    <button id="next">Next Page</button>
+</div>
+
+<!-- Initialize the flipbook -->
+<script>
+    $(document).ready(function(){
+        $("#flipbook").turn({
+            width: 800,
+            height: 600,
+            autoCenter: true,
+            duration: 1000, // Slows down the page-flipping motion (duration in milliseconds)
+            acceleration: true, // Enables CSS3 acceleration if available
+            gradients: true, // Adds gradients to make the page-turning effect fancier
+            elevation: 50, // Adds a 3D effect to the page flip
+        });
+
+        // Navigation buttons
+        $("#prev").click(function() {
+            $("#flipbook").turn("previous");
+        });
+        $("#next").click(function() {
+            $("#flipbook").turn("next");
+        });
+        $("#home").click(function() {
+            $("#flipbook").turn("page", 1);
+        });
+    });
+</script>
+
+</body>
+</html>

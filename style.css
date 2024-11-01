@@ -1,0 +1,14 @@
+body {
+    background-color: #f0f0f0;
+}
+
+#flipbook {
+    margin: 50px auto;
+}
+
+#flipbook .page {
+    width: 400px;
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+}
