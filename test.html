@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpiderAsks - Test</title>
+    <!-- Link to Custom CSS for Styling -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Bootstrap CSS for Layout and Components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Fixed Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ffba3d;">
+        <div class="container-fluid">
+            <!-- Brand Logo and Title -->
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="images/logo.png" alt="Logo" width="40" height="40" class="me-2">
+                <span>SpiderAsks</span>
+            </a>
+            <!-- Toggle Button for Mobile View -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="practice.html">Practice</a></li>
+                    <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="settings.html">Settings</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Courses Section -->
+    <section id="courses" class="py-5 text-center" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2>Test</h2>
+            <p>Please choose the type of writing test you would like to take.</p>
+
+            <!-- Main Bookshelf with Course Types -->
+            <div class="bookshelf d-flex justify-content-center">
+                <!-- Book 1: IELTS -->
+                <div class="book" id="book1">
+                    <img src="https://openclipart.org/image/800px/219894" alt="IELTS" class="book-image">
+                    <p class="book-caption">IELTS</p>
+                </div>
+                <!-- Book 2: TOEFL -->
+                <div class="book" id="book2">
+                    <img src="https://openclipart.org/image/800px/219894" alt="TOEFL" class="book-image">
+                    <p class="book-caption">TOEFL</p>
+                </div>
+                <!-- Book 3: SAT -->
+                <div class="book" id="book3">
+                    <img src="https://openclipart.org/image/800px/219894" alt="SAT" class="book-image">
+                    <p class="book-caption">SAT</p>
+                </div>
+                <!-- Book 4: GRE -->
+                <div class="book" id="book4">
+                    <img src="https://openclipart.org/image/800px/219894" alt="GRE" class="book-image">
+                    <p class="book-caption">GRE</p>
+                </div>
+                <!-- Book 5: GMAT -->
+                <div class="book" id="book5">
+                    <img src="https://openclipart.org/image/800px/219894" alt="GMAT" class="book-image">
+                    <p class="book-caption">GMAT</p>
+                </div>
+                <!-- Book 6: ACT -->
+                <div class="book" id="book6">
+                    <img src="https://openclipart.org/image/800px/219894" alt="ACT" class="book-image">
+                    <p class="book-caption">ACT</p>
+                </div>
+            </div>
+
+            <!-- Expanded Book Subcategories Section (Hidden by Default) -->
+            <div id="expanded-books" class="expanded-books d-none">
+                <p id="expanded-title"></p> <!-- Dynamically Updated Title -->
+                <!-- Subcategory Bookshelf Populated by JavaScript -->
+                <div id="subcategory-container" class="subcategory-container d-flex justify-content-center align-items-center">
+                    <!-- Additional books are generated dynamically here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links Section for Navigation -->
+    <section id="site-links" class="py-4 text-center" style="background-color: #f8f9fa;">
+        <div class="container">
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="index.html">Home</a></li>
+                <li class="list-inline-item"><a href="courses.html">Courses</a></li>
+                <li class="list-inline-item"><a href="practice.html">Practice</a></li>
+                <li class="list-inline-item"><a href="test.html">Test</a></li>
+                <li class="list-inline-item"><a href="profile.html">Profile</a></li>
+                <li class="list-inline-item"><a href="settings.html">Settings</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer py-3 text-center" style="background-color: #333; color: #bbb;">
+        <div class="container">
+            <p class="mb-1">&copy; 2024 SpiderAsks. All rights reserved.</p>
+            <p class="mb-0">Disclaimer: The website is in the testing stage, and the images and fonts used in this site are not properly credited. This is for academic purpose only. Please email the admin for any copyright infringement.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript and Custom Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
