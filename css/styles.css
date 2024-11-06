@@ -64,6 +64,7 @@ body {
     align-items: center;
     background: url('../images/background.gif') center/cover no-repeat;
     color: white;
+    position: relative; /* Enable absolute positioning for spiders */
 }
 
 #writing-section h1 {
@@ -83,7 +84,7 @@ body {
 
 #writing-section .form-select option {
     background-color: #333;
-    color:rgb(65, 0, 0);
+    color: rgb(65, 0, 0);
 }
 
 #writing-section .btn-primary {
@@ -93,9 +94,49 @@ body {
     color: black;
 }
 
-#writing-section .btn-primary:hover {
-    background-color: #e6a833;
-    border-color: #e6a833;
+/* ---- Spider Containers ---- */
+.spider-container {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    z-index: 30;
+    pointer-events: none;
+}
+
+/* Positioning Each Spider Container */
+.spider-1 {
+    top: -5%;
+    left: 85%;
+    animation-delay: 0s;
+}
+
+.spider-2 {
+    bottom: -1%;
+    left: 30%;
+    animation-delay: 4s;
+}
+
+.spider-3 {
+    bottom: 30%;
+    left: 40%;
+    transform: translateX(-50%);
+    animation-delay: 0.8s;
+}
+
+/* Spider Animation */
+.spider {
+    width: 100%;
+    animation: spider-bounce 5s infinite ease-in-out;
+}
+
+/* Bouncing Effect for Spider */
+@keyframes spider-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(40px); /* Bounces down */
+    }
 }
 
 /* ---- Carousel Section Styling ---- */
@@ -140,6 +181,7 @@ body {
     background: url('../images/background2.png') center/cover no-repeat;
     color: black; /* Adjust text color if needed */
 }
+
 
 /* ---- Bookshelf Section Styling ---- */
 .bookshelf {
