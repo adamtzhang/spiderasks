@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const subcategories = {
         book1: {
             title: "IELTS",
-            backgroundColor: "rgba(0, 0, 0, 0)", // Transparent background
+            backgroundColor: "rgba(0, 0, 0, 0)",
             subBooks: [
                 { text: "Foundations", link: "IELTS-Foundation.html" },
                 { text: "Beginner", link: "IELTS-Beginner.html" },
@@ -27,10 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 { text: "Advanced", link: "TOEFL-Advanced.html" }
             ]
         },
-        // More subcategory data for other books as needed...
+        // Additional subcategory data for other books...
     };
 
-    // Adds event listeners to each book in the main bookshelf
+    // Event listeners for book selection
     books.forEach(book => {
         book.addEventListener('click', () => {
             const bookId = book.id;
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
             expandedTitle.textContent = `Sub-categories for ${subcategory.title}`;
             expandedBooks.style.backgroundColor = subcategory.backgroundColor;
 
-            // Clear any previous subcategories displayed
+            // Clear previous content
             subcategoryContainer.innerHTML = '';
 
             // Populate subcategories for the selected book
@@ -69,37 +69,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 subcategoryContainer.appendChild(bookDiv);
             });
 
-            // Display the expanded section with subcategories
+            // Show the expanded section with subcategories
             expandedBooks.classList.remove('d-none');
         });
     });
 
-    // ---- Smooth Section Scrolling ----
-    const sections = document.querySelectorAll('section, #introCarousel'); // Select all sections for scrolling
-    let currentSection = 0; // Track the current section index
-    let isScrolling = false; // Debounce variable
+    // ---- Section Scrolling with IntersectionObserver ----
+    const sections = document.querySelectorAll('section, #introCarousel'); // Select all sections
+    const navbarHeight = document.querySelector('.navbar').offsetHeight; // Navbar height for offset
+    let activeSectionIndex = 0; // Track the currently active section
 
-    function scrollToSection(index) {
-        // Scroll smoothly to the selected section
-        sections[index].scrollIntoView({ behavior: 'smooth' });
-        currentSection = index; // Update current section index
+    // Smoothly scrolls to the section, aligning it below the navbar
+    function scrollToSection(element) {
+        const offsetTop = element.getBoundingClientRect().top + window.scrollY - navbarHeight;
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
     }
 
-    // Event listener for wheel scroll with debounce
-    window.addEventListener('wheel', (event) => {
-        if (isScrolling) return; // Prevent additional scroll events during transition
+    // IntersectionObserver options and callback
+    const observerOptions = {
+        root: null, // Use the viewport as the root
+        threshold: 0.5 // Trigger when 50% of the section is visible
+    };
 
-        // Determine scroll direction
-        if (event.deltaY > 0 && currentSection < sections.length - 1) {
-            // Scroll down to the next section
-            scrollToSection(currentSection + 1);
-        } else if (event.deltaY < 0 && currentSection > 0) {
-            // Scroll up to the previous section
-            scrollToSection(currentSection - 1);
-        }
+    const observerCallback = (entries) => {
+        entries.forEach(entry => {
+            const index = Array.from(sections).indexOf(entry.target);
+            if (entry.isIntersecting && index !== activeSectionIndex) {
+                activeSectionIndex = index;
+                scrollToSection(entry.target);
+            }
+        });
+    };
 
-        // Set debounce to prevent rapid scrolling
-        isScrolling = true;
-        setTimeout(() => { isScrolling = false; }, 1000); // Adjust debounce delay as needed
-    });
+    // Create and observe each section with IntersectionObserver
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    sections.forEach(section => observer.observe(section));
 });
