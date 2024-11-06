@@ -27,10 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 { text: "Advanced", link: "TOEFL-Advanced.html" }
             ]
         },
-        // Additional subcategory data for other books...
+        // Additional subcategory data for other books as needed...
     };
 
-    // Event listeners for book selection
+    // Adds event listeners to each book in the main bookshelf
     books.forEach(book => {
         book.addEventListener('click', () => {
             const bookId = book.id;
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
             expandedTitle.textContent = `Sub-categories for ${subcategory.title}`;
             expandedBooks.style.backgroundColor = subcategory.backgroundColor;
 
-            // Clear previous content
+            // Clear any previous subcategories displayed
             subcategoryContainer.innerHTML = '';
 
             // Populate subcategories for the selected book
@@ -69,17 +69,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 subcategoryContainer.appendChild(bookDiv);
             });
 
-            // Show the expanded section with subcategories
+            // Display the expanded section with subcategories
             expandedBooks.classList.remove('d-none');
         });
     });
 
-    // ---- Section Scrolling with IntersectionObserver ----
+    // ---- Section Scrolling with IntersectionObserver and Touch Support ----
     const sections = document.querySelectorAll('section, #introCarousel'); // Select all sections
-    const navbarHeight = document.querySelector('.navbar').offsetHeight; // Navbar height for offset
-    let activeSectionIndex = 0; // Track the currently active section
+    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+    let activeSectionIndex = 0;
 
-    // Smoothly scrolls to the section, aligning it below the navbar
     function scrollToSection(element) {
         const offsetTop = element.getBoundingClientRect().top + window.scrollY - navbarHeight;
         window.scrollTo({
@@ -88,10 +87,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // IntersectionObserver options and callback
+    // IntersectionObserver for desktop scrolling
     const observerOptions = {
-        root: null, // Use the viewport as the root
-        threshold: 0.5 // Trigger when 50% of the section is visible
+        root: null,
+        threshold: 0.5
     };
 
     const observerCallback = (entries) => {
@@ -104,7 +103,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-    // Create and observe each section with IntersectionObserver
     const observer = new IntersectionObserver(observerCallback, observerOptions);
     sections.forEach(section => observer.observe(section));
+
+    // Touch event handling for mobile devices
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    function handleTouchStart(event) {
+        touchStartY = event.touches[0].clientY;
+    }
+
+    function handleTouchEnd(event) {
+        touchEndY = event.changedTouches[0].clientY;
+        handleSwipe();
+    }
+
+    function handleSwipe() {
+        if (touchEndY < touchStartY - 50 && activeSectionIndex < sections.length - 1) {
+            // Swipe up to go to the next section
+            activeSectionIndex++;
+            scrollToSection(sections[activeSectionIndex]);
+        } else if (touchEndY > touchStartY + 50 && activeSectionIndex > 0) {
+            // Swipe down to go to the previous section
+            activeSectionIndex--;
+            scrollToSection(sections[activeSectionIndex]);
+        }
+    }
+
+    // Add touch event listeners to the document for mobile swipe support
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchend', handleTouchEnd, { passive: true });
 });
